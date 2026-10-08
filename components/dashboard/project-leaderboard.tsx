@@ -20,9 +20,9 @@ interface ProjectLeaderboardProps {
 }
 
 const getScoreColor = (score: number) => {
-  if (score >= 85) return '#10B981'; // เขียว
-  if (score >= 70) return '#3B82F6'; // ฟ้า
-  if (score >= 60) return '#F59E0B'; // ส้ม
+  if (score >= 70) return '#00ffaa'; // เขียว
+  if (score >= 0) return '#ff0000'; // ฟ้า
+  
   return '#EF4444'; // แดง
 };
 
