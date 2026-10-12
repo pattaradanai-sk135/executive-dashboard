@@ -79,6 +79,10 @@ async function fetchSingleSheet(
       const scoreNum = parseScoreValue(row[2]); 
       const cleanedName = cleanText(projectName);
 
+      // ดึงค่างบประมาณจาก Column D (Index 3)
+      const rawBudget = row[3] ? row[3].replace(/,/g, '').trim() : '0';
+      const budgetNum = parseFloat(rawBudget) || 0;
+
       // ดึงคะแนนย่อยจากชีท 5
       let scoreBreakdown = detailData.byNameMap.get(cleanedName);
 
@@ -99,6 +103,7 @@ async function fetchSingleSheet(
         id: row[0]?.trim() || `proj-${gid}-${index}`,
         name: projectName,
         score: scoreNum,
+        budget: budgetNum, // 👈 เพิ่มบรรทัดนี้ลงไปครับ
         scoreBreakdown: Array.isArray(scoreBreakdown) ? scoreBreakdown : [],
       });
     });

@@ -44,11 +44,16 @@ export default function DashboardPage() {
   const avgScore = totalProjects > 0 
     ? (projects.reduce((acc, p) => acc + (p.score || 0), 0) / totalProjects).toFixed(1)
     : '0.0';
-  
+
+  // 1. เพิ่มการประกาศตัวแปร topProject
   const topProject = projects.length > 0 
     ? [...projects].sort((a, b) => b.score - a.score)[0]
     : null;
 
+  // 2. คำนวณงบประมาณรวมเฉพาะโครงการสีเขียว (เช่น คะแนน >= 80)
+  const greenBudgetTotal = projects
+    .filter((p) => (p.score || 0) >= 73)
+    .reduce((acc, p) => acc + Number(p.budget || 0), 0);
   return (
     <main className="min-h-screen bg-slate-50 p-6 md:p-10">
       <div className="max-w-7xl mx-auto space-y-8">
@@ -116,6 +121,21 @@ export default function DashboardPage() {
             </p>
           </div>
         </div>
+
+        {/* Summary Cards Container */}
+<div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+  {/* Card 1: โครงการทั้งหมด */}
+  {/* Card 2: คะแนนเฉลี่ย */}
+  {/* Card 3: โครงการอันดับสูงสุด */}
+
+  {/* ➕ Card 4: งบประมาณรวมกลุ่มสีเขียว */}
+  <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+    <p className="text-sm font-medium text-slate-500">งบประมาณรวม (กลุ่มสีเขียว)</p>
+    <p className="text-2xl font-bold text-emerald-600 mt-2">
+      {loading ? '...' : `${greenBudgetTotal.toLocaleString()} บาท`}
+    </p>
+  </div>
+</div>
 
         {/* Ranking List / Leaderboard */}
         <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">

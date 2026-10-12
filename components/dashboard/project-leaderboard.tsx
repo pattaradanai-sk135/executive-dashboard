@@ -56,7 +56,7 @@ export const ProjectLeaderboard: React.FC<ProjectLeaderboardProps> = ({
           height={chartHeight} // 🎯 บังคับความสูงจริงของกราฟตามจำนวนโครงการ x 80px
           data={projects}
           layout="vertical"
-          margin={{ top: 10, right: 40, left: 20, bottom: 10 }}
+          margin={{ top: 10, right: 60, left: 20, bottom: 10 }}
           style={{ width: '100%' }}
         >
           <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#E4E4E7" />
@@ -105,6 +105,19 @@ export const ProjectLeaderboard: React.FC<ProjectLeaderboardProps> = ({
               fontWeight={600}
               dx={-8}
             />
+            <LabelList
+            dataKey="budget"
+            position="right"
+            fill="#64748B" // สีข้อความ slate-500
+            fontSize={12}
+            fontWeight={500}
+            dx={8}
+            formatter={(value: any) => {
+              const num = Number(value);
+              if (!num || num === 0) return '';
+              return `(${num.toLocaleString()} บาท)`;
+            }}
+          />
             {projects.map((entry, index) => (
               <Cell
                 key={`cell-${index}`}
