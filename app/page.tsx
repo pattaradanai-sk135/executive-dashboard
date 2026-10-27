@@ -52,7 +52,7 @@ export default function DashboardPage() {
 
   // 2. คำนวณงบประมาณรวมเฉพาะโครงการสีเขียว (เช่น คะแนน >= 80)
   const greenBudgetTotal = projects
-    .filter((p) => (p.score || 0) >= 73)
+    .filter((p) => (p.score || 0) >= 70)
     .reduce((acc, p) => acc + Number(p.budget || 0), 0);
   return (
     <main className="min-h-screen bg-slate-50 p-6 md:p-10">

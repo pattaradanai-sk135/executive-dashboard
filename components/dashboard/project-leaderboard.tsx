@@ -20,7 +20,7 @@ interface ProjectLeaderboardProps {
 }
 
 const getScoreColor = (score: number) => {
-  if (score >= 73) return '#22e0a1'; // เขียว
+  if (score >= 70) return '#22e0a1'; // เขียว
   if (score >= 0) return '#d62323'; // ฟ้า
   
   return '#EF4444'; // แดง
@@ -100,7 +100,7 @@ export const ProjectLeaderboard: React.FC<ProjectLeaderboardProps> = ({
             <LabelList
               dataKey="score"
               position="insideRight"
-              fill="#FFFFFF"
+              fill="#020202"
               fontSize={12}
               fontWeight={600}
               dx={-8}
