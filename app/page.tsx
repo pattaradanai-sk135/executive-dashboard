@@ -54,6 +54,8 @@ export default function DashboardPage() {
   const greenBudgetTotal = projects
     .filter((p) => (p.score || 0) >= 70)
     .reduce((acc, p) => acc + Number(p.budget || 0), 0);
+    // 2. คำนวณผลต่าง (10,950,000 - greenBudgetTotal)
+  const budgetDifference = 10950000 - greenBudgetTotal;
   return (
     <main className="min-h-screen bg-slate-50 p-6 md:p-10">
       <div className="max-w-7xl mx-auto space-y-8">
@@ -136,6 +138,18 @@ export default function DashboardPage() {
     </p>
   </div>
 </div>
+
+{/* Summary Card: ผลต่างงบประมาณ */}
+  <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+    <p className="text-sm font-medium text-slate-500">คงเหลืองบประมาณ (จาก 10.95M)</p>
+    <p
+      className={`text-2xl font-bold mt-2 ${
+        budgetDifference < 0 ? 'text-red-600' : 'text-emerald-600'
+      }`}
+    >
+      {loading ? '...' : `${budgetDifference.toLocaleString()} บาท`}
+    </p>
+  </div>
 
         {/* Ranking List / Leaderboard */}
         <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
